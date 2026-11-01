@@ -75,6 +75,24 @@ void test_reverse() {
     std::cout << "test_reverse passed" << std::endl;
 }
 
+void test_sort() {
+    DoublyLinkedList<int> list;
+
+    list.push_back(4);
+    list.push_back(2);
+    list.push_back(5);
+    list.push_back(1);
+    list.push_back(3);
+
+    list.sort();
+
+    assert(list.front() == 1);
+    assert(list.back() == 5);
+    assert(list.size() == 5);
+
+    std::cout << "test_sort passed" << std::endl;
+}
+
 // void test_push_front() { ... }
 // void test_pop_back() { ... }
 
@@ -83,6 +101,7 @@ int main() {
     test_push_back();
     test_erase_node();
     test_reverse();
+    test_sort();
     std::cout << "All tests passed" << std::endl;
     return 0;
 }

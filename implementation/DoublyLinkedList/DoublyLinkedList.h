@@ -126,6 +126,31 @@ void reverse() {
     _head = _tail;
     _tail = temp;
 }
+
+void sort() {
+    if (_head == nullptr || _head->next == nullptr) {
+        return;
+    }
+
+    bool swapped;
+
+    do {
+        swapped = false;
+        Node* current = _head;
+
+        while (current->next != nullptr) {
+            if (current->data > current->next->data) {
+                T temp = current->data;
+                current->data = current->next->data;
+                current->next->data = temp;
+
+                swapped = true;
+            }
+
+            current = current->next;
+        }
+    } while (swapped);
+}
  
     
     int size() const{
