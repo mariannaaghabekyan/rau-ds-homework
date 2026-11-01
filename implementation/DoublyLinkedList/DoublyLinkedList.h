@@ -17,10 +17,12 @@ private:
 
 public:
     /// 1. Конструктор по умолчанию
-    DoublyLinkedList();
+   DoublyLinkedList() : _head(nullptr), _tail(nullptr), _size(0) {}
     
     /// 2. Деструктор
-    ~DoublyLinkedList();
+    ~DoublyLinkedList(){
+        clear();
+    }
     
     /// 3. Конструктор копирования
     DoublyLinkedList(const DoublyLinkedList& other);
@@ -29,7 +31,19 @@ public:
     DoublyLinkedList& operator=(const DoublyLinkedList& other);
     
     /// 5. push_back(const T& x) - добавить в конец
-    void push_back(const T& x);
+    void push_back(const T& x){
+    Node* node = new Node(x);
+
+    if (_tail == nullptr) {
+        _head = _tail = node;
+    } else {
+        node->prev = _tail;
+        _tail->next = node;
+        _tail = node;
+    }
+
+    ++_size;
+}
     
     /// 6. push_front(const T& x) - добавить в начало
     void push_front(const T& x);
@@ -45,23 +59,70 @@ public:
     
     /// 10. erase(int pos) - удалить с позиции
     void erase(int pos);
+    void erase(Node* node) {
+    if (node == nullptr) {
+        return;
+    }
+
+    if (node->prev != nullptr) {
+        node->prev->next = node->next;
+    } else {
+        _head = node->next;
+    }
+
+    if (node->next != nullptr) {
+        node->next->prev = node->prev;
+    } else {
+        _tail = node->prev;
+    }
+
+    delete node;
+    --_size;
+}
     
     /// 11. front() - первый элемент
-    T& front();
-    const T& front() const;
+    T& front(){
+        return _head->data;
+    }
+    const T& front() const{
+        return _head->data;
+    }
     
     /// 12. back() - последний элемент
-    T& back();
-    const T& back() const;
+    T& back() {
+    return _tail->data;
+}
+    const T& back() const{
+    return _tail->data;
+}
     
     /// 13. clear() - очистить
-    void clear();
+    void clear(){
+    Node* current = _head;
+
+    while (current != nullptr) {
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+
+    _head = nullptr;
+    _tail = nullptr;
+    _size = 0;
+}
     
     /// 14. reverse() - развернуть
     void reverse();
     
-    int size() const;
-    bool empty() const;
+    int size() const{
+        return _size;
+    }
+    bool empty() const{
+        return _size == 0;
+    }
+    Node* begin() {
+    return _head;
+}
 };
 
 #endif // DOUBLYLINKEDLIST_H

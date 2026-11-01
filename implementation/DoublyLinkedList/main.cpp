@@ -31,6 +31,33 @@ void test_push_back() {
     
     std::cout << "test_push_back passed" << std::endl;
 }
+void test_erase_node() {
+    DoublyLinkedList<int> list;
+
+    list.push_back(10);
+    list.push_back(20);
+    list.push_back(30);
+
+    auto* middle = list.begin()->next;
+    list.erase(middle);
+
+    assert(list.size() == 2);
+    assert(list.front() == 10);
+    assert(list.back() == 30);
+
+    auto* first = list.begin();
+    list.erase(first);
+
+    assert(list.size() == 1);
+    assert(list.front() == 30);
+
+    auto* last = list.begin();
+    list.erase(last);
+
+    assert(list.empty());
+
+    std::cout << "test_erase_node passed" << std::endl;
+}
 
 // void test_push_front() { ... }
 // void test_pop_back() { ... }
@@ -38,6 +65,7 @@ void test_push_back() {
 int main() {
     std::cout << "Running DoublyLinkedList tests" << std::endl;
     test_push_back();
+    test_erase_node();
     std::cout << "All tests passed" << std::endl;
     return 0;
 }
