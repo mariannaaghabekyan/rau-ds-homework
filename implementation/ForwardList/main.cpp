@@ -149,6 +149,29 @@ void test_findMiddle() {
     std::cout << "test_findMiddle passed\n";
 }
 
+void test_hasCycle() {
+    ForwardList<int> list;
+
+    assert(!list.hasCycle());
+
+    list.push_front(3);
+    list.push_front(2);
+    list.push_front(1);
+
+    auto* head = list.begin();
+    auto* tail = head->next->next;
+
+    assert(!list.hasCycle());
+
+    tail->next = head->next;
+    assert(list.hasCycle());
+
+    tail->next = nullptr;
+    assert(!list.hasCycle());
+
+    std::cout << "test_hasCycle passed\n";
+}
+
 
 void test_size_empty_begin() {
     ForwardList<int> list;
@@ -228,6 +251,7 @@ int main() {
     test_clear();
     test_reverse();
     test_findMiddle();
+    test_hasCycle();
     test_size_empty_begin();
     test_copy_constructor();
     test_assignment();

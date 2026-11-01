@@ -146,6 +146,22 @@ Node* findMiddle(){
     }
     return slow;
 }
+
+bool hasCycle() const {
+    Node* slow = _head;
+    Node* fast = _head;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast) {
+            return true;
+        }
+    }
+
+    return false;
+}
 private:
 void push_back_copy(const T& value){
   Node* node = new Node(value);
