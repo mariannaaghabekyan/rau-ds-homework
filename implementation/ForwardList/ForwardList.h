@@ -136,6 +136,16 @@ public:
     Node* begin() const{
        return _head;
 }
+Node* findMiddle(){
+    Node* slow = _head;
+    Node* fast = _head;
+
+    while(fast != nullptr && fast->next != nullptr){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
 private:
 void push_back_copy(const T& value){
   Node* node = new Node(value);

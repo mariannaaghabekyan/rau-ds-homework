@@ -129,6 +129,27 @@ void test_reverse() {
     std::cout << "test_reverse passed\n";
 }
 
+void test_findMiddle() {
+    ForwardList<int> list;
+
+    assert(list.findMiddle() == nullptr);
+
+    list.push_front(5);
+    list.push_front(4);
+    list.push_front(3);
+    list.push_front(2);
+    list.push_front(1);
+
+    assert(list.findMiddle()->data == 3);
+
+    list.push_front(0);
+
+    assert(list.findMiddle()->data == 3);
+
+    std::cout << "test_findMiddle passed\n";
+}
+
+
 void test_size_empty_begin() {
     ForwardList<int> list;
     assert(list.size() == 0);
@@ -206,6 +227,7 @@ int main() {
     test_erase_after();
     test_clear();
     test_reverse();
+    test_findMiddle();
     test_size_empty_begin();
     test_copy_constructor();
     test_assignment();
