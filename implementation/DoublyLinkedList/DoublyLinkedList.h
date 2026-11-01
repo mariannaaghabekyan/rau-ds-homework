@@ -110,9 +110,23 @@ public:
     _tail = nullptr;
     _size = 0;
 }
-    
-    /// 14. reverse() - развернуть
-    void reverse();
+
+void reverse() {
+    Node* current = _head;
+
+    while (current != nullptr) {
+        Node* temp = current->next;
+        current->next = current->prev;
+        current->prev = temp;
+
+        current = temp;
+    }
+
+    Node* temp = _head;
+    _head = _tail;
+    _tail = temp;
+}
+ 
     
     int size() const{
         return _size;
