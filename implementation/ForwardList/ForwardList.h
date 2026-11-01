@@ -162,6 +162,21 @@ bool hasCycle() const {
 
     return false;
 }
+void removeDuplicates() {
+    Node* current = _head;
+
+    while (current != nullptr && current->next != nullptr) {
+        if (current->data == current->next->data) {
+            Node* duplicate = current->next;
+            current->next = duplicate->next;
+            delete duplicate;
+            --_size;
+        } else {
+            current = current->next;
+        }
+    }
+}
+
 private:
 void push_back_copy(const T& value){
   Node* node = new Node(value);

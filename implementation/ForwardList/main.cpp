@@ -172,6 +172,29 @@ void test_hasCycle() {
     std::cout << "test_hasCycle passed\n";
 }
 
+void test_removeDuplicates() {
+    ForwardList<int> emptyList;
+    emptyList.removeDuplicates();
+    assert(emptyList.empty());
+
+    ForwardList<int> list;
+    list.push_front(3);
+    list.push_front(3);
+    list.push_front(2);
+    list.push_front(1);
+    list.push_front(1);
+
+    list.removeDuplicates();
+
+    assert(list.size() == 3);
+    assert(list.begin()->data == 1);
+    assert(list.begin()->next->data == 2);
+    assert(list.begin()->next->next->data == 3);
+    assert(list.begin()->next->next->next == nullptr);
+
+    std::cout << "test_removeDuplicates passed\n";
+}
+
 
 void test_size_empty_begin() {
     ForwardList<int> list;
@@ -252,6 +275,7 @@ int main() {
     test_reverse();
     test_findMiddle();
     test_hasCycle();
+    test_removeDuplicates();
     test_size_empty_begin();
     test_copy_constructor();
     test_assignment();
